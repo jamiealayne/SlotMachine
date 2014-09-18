@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 		self.fourthContainer = UIView(frame:
 			CGRectMake(self.view.bounds.origin.x + VIEW_MARGIN, self.firstContainer.frame.height + secondContainer.frame.height + thirdContainer.frame.height, self.view.bounds.width - (2 * VIEW_MARGIN), self.view.bounds.height * SIXTH ) )
 		
-		self.fourthContainer.backgroundColor = UIColor.lightGrayColor()
+		self.fourthContainer.backgroundColor = UIColor.blackColor()
 		self.view.addSubview(self.fourthContainer)
 
 		
