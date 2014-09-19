@@ -26,6 +26,15 @@ class ViewController: UIViewController {
 	// Top Container Variables
 	var titleLable: UILabel!
 	
+	// Third Container Variables
+	var creditsLabel: UILabel!
+	var creditsTitleLabel: UILabel!
+	
+	var betLabel: UILabel!
+	var betTitleLabel: UILabel!
+	
+	var winnerPaidLabel: UILabel!
+	var winnerPaidTitleLable: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -63,6 +72,7 @@ class ViewController: UIViewController {
 		
 		self.thirdContainer.backgroundColor = UIColor.lightGrayColor()
 		self.view.addSubview(self.thirdContainer)
+		setUpThirdContainer(self.thirdContainer)
 		
 		// Fourth Container Config
 		self.fourthContainer = UIView(frame:
@@ -103,5 +113,52 @@ class ViewController: UIViewController {
 			}
 		}
 	}
+	
+	func setUpThirdContainer(containerView: UIView) {
+		
+		func createLabel(text: String, row: CGFloat, col: CGFloat, font: UIFont,
+				color: UIColor = UIColor.blackColor(), backgroundColor: UIColor = UIColor.clearColor() ) -> UILabel {
+					
+			var newLabel = UILabel()
+			newLabel.text = text
+			newLabel.textColor = color
+			newLabel.backgroundColor = backgroundColor
+			newLabel.font = UIFont(name: "Manlo-Bold", size: 16)
+			newLabel.sizeToFit()
+			
+			newLabel.center	= CGPointMake(
+				(2 * col - 1)/2 * containerView.frame.width / kNumberOfContainers,
+				(2 * row - 1)/2 * containerView.frame.height / kNumberOfSlots
+			)
+			newLabel.textAlignment = NSTextAlignment.Center
+			
+			return newLabel
+		}
+		var labelFont = UIFont(name: "Manlo-Bold", size: 16)
+		var titleFont = UIFont(name: "AmericanTypewriter", size: 14)
+		var labelColor = UIColor.redColor()
+		var labelBG = UIColor.darkGrayColor()
+		
+		self.creditsLabel = createLabel("00000", 1, 1, labelFont, color: labelColor, backgroundColor: labelBG)
+		containerView.addSubview(self.creditsLabel)
+		
+		self.creditsTitleLabel = createLabel("Credits", 2, 1, titleFont )
+		containerView.addSubview(self.creditsTitleLabel)
+
+		self.betLabel = createLabel("0000", 1, 2, labelFont, color: labelColor, backgroundColor: labelBG)
+		containerView.addSubview(self.betLabel)
+		
+		self.betTitleLabel = createLabel("Bet", 2, 2, titleFont)
+		containerView.addSubview(self.betTitleLabel)
+		
+		self.winnerPaidLabel = createLabel("00000", 1, 3, labelFont, color: labelColor, backgroundColor: labelBG)
+		containerView.addSubview(self.winnerPaidLabel)
+		
+		self.winnerPaidTitleLable = createLabel("Winner Paid", 2, 3, titleFont)
+		containerView.addSubview(self.winnerPaidTitleLable)
+		
+		
+	}
 }
+
 
