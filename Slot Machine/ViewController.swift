@@ -36,6 +36,13 @@ class ViewController: UIViewController {
 	var winnerPaidLabel: UILabel!
 	var winnerPaidTitleLable: UILabel!
 	
+	// Fourth Container Variables
+	var resetButton: UIButton!
+	var bet1Button: UIButton!
+	var betMaxButton: UIButton!
+	var spinButton: UIButton!
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -46,6 +53,22 @@ class ViewController: UIViewController {
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	func resetButtonPressed(button: UIButton) {
+		println("Reset Pressed")
+	}
+	
+	func bet1ButtonPressed(button: UIButton) {
+		println("Bet 1 Pressed")
+	}
+	
+	func betMaxButtonPressed(button: UIButton) {
+		println("Bet Max Pressed")
+	}
+	
+	func spinButtonPressed(button: UIButton) {
+		println("Spin Pressed")
 	}
 
 
@@ -80,7 +103,7 @@ class ViewController: UIViewController {
 		
 		self.fourthContainer.backgroundColor = UIColor.blackColor()
 		self.view.addSubview(self.fourthContainer)
-
+		setUpFourthContainer(self.fourthContainer)
 		
 	}
 	
@@ -115,6 +138,8 @@ class ViewController: UIViewController {
 	}
 	
 	func setUpThirdContainer(containerView: UIView) {
+		var numButtons: CGFloat = 3.0
+		var numButtonRows: CGFloat = 2.0
 		
 		func createLabel(text: String, row: CGFloat, col: CGFloat, font: UIFont,
 				color: UIColor = UIColor.blackColor(), backgroundColor: UIColor = UIColor.clearColor() ) -> UILabel {
@@ -123,12 +148,12 @@ class ViewController: UIViewController {
 			newLabel.text = text
 			newLabel.textColor = color
 			newLabel.backgroundColor = backgroundColor
-			newLabel.font = UIFont(name: "Manlo-Bold", size: 16)
+			newLabel.font = font
 			newLabel.sizeToFit()
 			
 			newLabel.center	= CGPointMake(
-				(2 * col - 1)/2 * containerView.frame.width / kNumberOfContainers,
-				(2 * row - 1)/2 * containerView.frame.height / kNumberOfSlots
+				(2 * col - 1)/2 * containerView.frame.width / numButtons,
+				(2 * row - 1)/2 * containerView.frame.height / numButtonRows
 			)
 			newLabel.textAlignment = NSTextAlignment.Center
 			
@@ -159,6 +184,40 @@ class ViewController: UIViewController {
 		
 		
 	}
+	
+	func setUpFourthContainer(containerView: UIView)  {
+		var numButtons: CGFloat = 4
+		
+		func createButton(buttonNumber: CGFloat, title: String, color: UIColor, backgroundColor: UIColor, font: UIFont, buttonAction: Selector, forState: UIControlState = UIControlState.Normal) -> UIButton {
+			var button = UIButton()
+			button.setTitle(title, forState: forState)
+			button.setTitleColor(color, forState: forState)
+			button.backgroundColor = backgroundColor
+			button.titleLabel?.font = font
+			button.sizeToFit()
+			button.center = CGPointMake( (2 * buttonNumber - 1)/2 *  containerView.frame.width/numButtons, containerView.frame.height / 2)
+			button.addTarget(self, action: buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
+			return button
+		}
+		
+		
+		let buttonFont = UIFont(name: "SuperClarendon-Bold", size: 12)
+		
+		self.resetButton = createButton(1, "Reset", UIColor.blueColor(), UIColor.lightGrayColor(), buttonFont, "resetButtonPressed:")
+		containerView.addSubview(self.resetButton)
+		
+		self.bet1Button = createButton(2, "Bet 1", UIColor.blueColor(), UIColor.greenColor(), buttonFont, "bet1ButtonPressed:")
+		containerView.addSubview(self.bet1Button)
+		
+		self.betMaxButton = createButton(3, "Bet Max", UIColor.blueColor(), UIColor.lightGrayColor(), buttonFont, "betMaxButtonPressed:")
+		containerView.addSubview(self.betMaxButton)
+		
+		self.spinButton = createButton(4, "Spin", UIColor.blueColor(), UIColor.lightGrayColor(), buttonFont, "spinButtonPressed:")
+		containerView.addSubview(self.spinButton)
+		
+	}
+	
+
 }
 
 
